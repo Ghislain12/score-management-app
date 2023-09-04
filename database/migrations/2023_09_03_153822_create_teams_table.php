@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('picture');
             $table->string('coach');
             $table->string('slogan');
-            $table->integer('followers')->default(0);
             $table->timestamps();
         });
     }

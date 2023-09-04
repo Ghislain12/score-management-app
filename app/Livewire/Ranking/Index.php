@@ -1,42 +1,19 @@
 <?php
 
-namespace App\Livewire\Teams;
+namespace App\Livewire\Ranking;
 
 use App\Models\Encounter;
 use App\Models\Team;
 use Livewire\Component;
 
-class Show extends Component
+class Index extends Component
 {
-    public $details;
-
-    public $nextMatchs;
-
-    public int $team;
-
-    public $data;
-
     public array $ranking;
 
     public $i = 0;
 
     public function mount()
     {
-        $this->data = Team::where('id', $this->team)->first();
-        $this->details = Encounter::where(function ($query) {
-            $query->where('first_team', $this->team)
-                ->orWhere('second_team', $this->team);
-        })
-            ->whereDate('start_date', '<', date('Y-m-d H:i:s'))
-            ->get();
-        $this->nextMatchs = Encounter::where(function ($query) {
-            $query->where('first_team', $this->team)
-                ->orWhere('second_team', $this->team);
-        })
-            ->whereDate('start_date', '>=', date('Y-m-d H:i:s'))
-            ->orderBy('start_date')
-            ->get();
-
         $teamIds = Team::all()->pluck('id');
 
         $globalArray = [];
@@ -74,6 +51,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.teams.show');
+        return view('livewire.ranking.index');
     }
 }

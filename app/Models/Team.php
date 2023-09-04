@@ -15,7 +15,6 @@ class Team extends Model
         'picture',
         'coach',
         'slogan',
-        'followers',
     ];
 
     public function enconter(): HasMany
@@ -27,14 +26,4 @@ class Team extends Model
     {
         return $this->hasMany(Follower::class, 'team_id');
     }
-
-    // public function firstTeam(): HasMany
-    // {
-    //     return $this->hasMany(Encounter::class, 'first_team');
-    // }
-
-    // public function secondTeam(): HasMany
-    // {
-    //     return $this->hasMany(Encounter::class, 'second_team');
-    // }
 }

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         Team::factory(4)->create();
 
-        Encounter::factory(2)->create();
+        Encounter::factory(5)->create();
 
         MatchDetail::factory(10)->create();
 

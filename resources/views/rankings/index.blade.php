@@ -16,7 +16,8 @@
     </style>
 
     <div
-        class="relative bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots dark:bg-gray-900 selection:bg-indigo-500 selection:text-white">
-        <livewire:teams.show :team="$id" />
+        class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center bg-dots dark:bg-gray-900 selection:bg-indigo-500 selection:text-white">
+        @livewire('ranking.index')
     </div>
+    
 @endsection

@@ -37,3 +37,7 @@ Route::prefix('teams')->as('teams:')->group(
 Route::prefix('plans')->as('plans:')->group(
     base_path('routes/web/plans.php'),
 );
+
+Route::prefix('rankings')->as('rankings:')->group(
+    base_path('routes/web/rankings.php'),
+);

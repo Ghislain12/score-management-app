@@ -17,7 +17,7 @@
                             <small
                                 class="block mt-1 text-sm font-medium leading-none text-neutral-500"><span>@</span><span>{{ strtolower($item->name) }}</span></small>
                         </a>
-                        @if (Auth::user()->followThisTeam($item->id))
+                        @if (Auth::user() && Auth::user()->followThisTeam($item->id))
                             <button wire:click="unFollow('{{ $item->id }}')"
                                 class="absolute right-0 inline-flex items-center justify-center w-auto px-5 mt-6 text-sm font-medium transition-colors duration-100 rounded-full h-9 mr-7 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 bg-neutral-900 disabled:pointer-events-none hover:bg-neutral-800 text-neutral-100">
                                 <span>
@@ -25,7 +25,7 @@
                                 </span>
                             </button>
                         @endif
-                        @if (!Auth::user()->followThisTeam($item->id))
+                        @if (Auth::user() && !Auth::user()->followThisTeam($item->id))
                             <button wire:click="follower('{{ $item->id }}')"
                                 class="absolute right-0 inline-flex items-center justify-center w-auto px-5 mt-6 text-sm font-medium transition-colors duration-100 rounded-full h-9 mr-7 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 bg-neutral-900 disabled:pointer-events-none hover:bg-neutral-800 text-neutral-100">
                                 <span>
