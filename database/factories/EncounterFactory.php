@@ -21,7 +21,7 @@ class EncounterFactory extends Factory
             'first_team' => 1,
             'second_team' => Team::where('id', '!=', 1)->get()->random()->id,
             'arbitrator' => fake()->name(),
-            'start_date' => '2023-09-03 15:00:00',
+            'start_date' => fake()->dateTimeBetween(startDate: '2023-09-05 14:00:00', endDate: '2023-09-06 16:00:00'),
         ];
     }
 }

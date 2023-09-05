@@ -1,5 +1,5 @@
 <div
-    class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots dark:bg-gray-900 selection:bg-indigo-500 selection:text-white">
+    class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center mt-5 bg-dots dark:bg-gray-900 selection:bg-indigo-500 selection:text-white">
     <div class="px-6 mx-auto max-w-8xl lg:px-8">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
             @foreach ($teams as $item)

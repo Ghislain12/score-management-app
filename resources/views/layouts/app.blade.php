@@ -21,9 +21,9 @@
                     </a>
                     <div :class="{ 'flex': showMenu, 'hidden md:flex': !showMenu }"
                         class="absolute z-50 flex-col items-center justify-center w-full h-auto px-2 text-center text-gray-400 -translate-x-1/2 border-0 border-gray-700 rounded-full md:border md:w-auto md:h-10 left-1/2 md:flex-row md:items-center">
-                        <a href="#"
+                        <a href="{{ route('home') }}"
                             class="relative inline-block w-full h-full px-4 py-5 mx-2 font-medium leading-tight text-center @if (Route::currentRouteName() == 'home') text-white @endif hover:text-white md:py-2 group md:w-auto md:px-2 lg:mx-3 md:text-center">
-                            <span>Match en cours</span>
+                            <span>Live</span>
                             <span
                                 class="absolute bottom-0 left-0 w-full h-px duration-300 ease-out translate-y-px bg-gradient-to-r md:from-gray-700 md:via-gray-400 md:to-gray-700 from-gray-900 via-gray-600 to-gray-900"></span>
                         </a>

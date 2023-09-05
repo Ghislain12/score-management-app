@@ -15,6 +15,7 @@
                             class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
                             data-primary="blue-600" data-rounded="rounded-lg" placeholder="Email" />
                     </div>
+                    {{ $email }}
                     <div class="relative">
                         <label class="font-medium text-gray-900">Mot de passe</label>
                         <input type="password" wire:model='password'

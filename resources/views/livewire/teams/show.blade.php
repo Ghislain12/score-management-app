@@ -27,33 +27,45 @@
                     </h2>
                     <div id="accordion-collapse-body-{{ $item->id }}" class="hidden max-h-[75vh] overflow-auto px-4"
                         aria-labelledby="accordion-collapse-heading-1">
-                        <ol class="relative border-l border-gray-200 dark:border-gray-700 pb-4 mt-5">
+                        <ol class="relative border-l border-gray-200 dark:border-gray-700 mt-5">
                             @if ($item->event->count() > 0)
                                 @foreach ($item->event as $detail)
-                                    <li class="mb-10 ml-4">
+                                    <li class="mb-10 ml-6">
+                                        <span
+                                            class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                            <img class="rounded-full shadow-lg"
+                                                src="{{ asset('asset/—Pngtree—soccer ball vector template design_4102617.png') }}"
+                                                alt="Thomas Lean image" />
+                                        </span>
                                         <div
-                                            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+                                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-600">
+                                            <div class="items-center justify-between mb-3 sm:flex">
+                                                <time
+                                                    class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{ $detail->created_at->diffForHumans() }}
+                                                </time>
+                                                <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300">
+                                                    <a href=""
+                                                        class="font-semibold text-gray-900 dark:text-white hover:underline">{{ $detail->title }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="p-3 text-xs italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
+                                                {{ $detail->event }}</div>
                                         </div>
-                                        <time
-                                            class="mb-1 text-sm font-normal leading-none text-blue-400 dark:text-gray-500">{{ $detail->created_at }}</time>
-                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                            {{ $detail->title }}
-                                        </h3>
-                                        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                                            {{ $detail->event }}</p>
                                     </li>
                                 @endforeach
                             @else
                                 <div
-                                    class="relative md:w-5/12 w-full mx-auto rounded-lg border border-transparent bg-yellow-50 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-yellow-600 mt-5">
+                                    class="relative mb-4 md:w-5/12 w-full mx-auto rounded-lg border border-transparent bg-yellow-50 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-yellow-600 mt-5">
                                     <svg class="w-5 h-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                         class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                                     </svg>
-                                    <h5 class="mb-1 font-medium leading-none tracking-tight text-center">Aucun détail
-                                        disponible pour ce match
+                                    <h5 class="mb-1 font-medium leading-none tracking-tight text-center">
+                                        Aucun détail disponible pour ce match
                                     </h5>
                                 </div>
                             @endif
@@ -75,7 +87,7 @@
         <h3 class="md:text-4xl text-xl font-extrabold dark:text-white my-4">Programme des matchs à venir</h3>
         @if ($nextMatchs->count() > 0)
             <div x-data="{ activeTab: 0 }" class="relative w-full">
-                <div class="flex justify-between">
+                <div class="flex justify-between bg-gray-200 p-2">
                     @foreach ($nextMatchs as $index => $match)
                         <button @click="activeTab = {{ $index }}"
                             :class="{
@@ -93,7 +105,7 @@
                             <div class="flex items-center justify-between md:px-60">
                                 <div class="flex-col justify-center items-center">
                                     <img src="{{ $match->firstTeam->picture }}" alt="logo"
-                                        class="rounded-full h-20 w-20">
+                                        class="rounded-full h-20 w-20 mx-auto">
                                     <h3
                                         class="mb-6 text-xl text-center mt-4 font-extrabold leading-none max-w-5xl mx-auto tracking-normal text-gray-900 md:tracking-tight">
                                         <span
@@ -107,7 +119,7 @@
                                 </div>
                                 <div>
                                     <img src="{{ $match->secondTeam->picture }}" alt="logo"
-                                        class="rounded-full h-20 w-20">
+                                        class="rounded-full h-20 w-20 mx-auto">
                                     <h3
                                         class="mb-6 text-xl text-center mt-4 font-extrabold leading-none max-w-5xl mx-auto tracking-normal text-gray-900 md:tracking-tight">
                                         <span
@@ -144,6 +156,9 @@
                                     <th class="px-5 py-3 text-xs font-medium text-left uppercase">N°</th>
                                     <th class="px-5 py-3 text-xs font-medium text-left uppercase">Equipes</th>
                                     <th class="px-5 py-3 text-xs font-medium text-left uppercase">Match joués</th>
+                                    <th class="px-5 py-3 text-xs font-medium text-left uppercase">Match nul</th>
+                                    <th class="px-5 py-3 text-xs font-medium text-left uppercase">Victoires</th>
+                                    <th class="px-5 py-3 text-xs font-medium text-left uppercase">Défaites</th>
                                     <th class="px-5 py-3 text-xs font-medium text-right uppercase">Points</th>
                                 </tr>
                             </thead>
@@ -158,6 +173,15 @@
                                         </td>
                                         <td class="px-5 py-4 text-sm whitespace-nowrap text-left">
                                             {{ $item['totalMatch'] }}
+                                        </td>
+                                        <td class="px-5 py-4 text-sm whitespace-nowrap text-left">
+                                            {{ $item['draws'] }}
+                                        </td>
+                                        <td class="px-5 py-4 text-sm whitespace-nowrap text-left">
+                                            {{ $item['victories'] }}
+                                        </td>
+                                        <td class="px-5 py-4 text-sm whitespace-nowrap text-left">
+                                            {{ $item['defeats'] }}
                                         </td>
                                         <td class="px-5 py-4 text-sm whitespace-nowrap text-end">
                                             {{ $item['total'] }}
