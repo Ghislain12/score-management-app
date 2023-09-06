@@ -1,8 +1,12 @@
 <div class="px-4 xl:w-7/12 mx-auto">
     <h3 class="md:text-4xl text-xl font-extrabold dark:text-white my-4">Classement du tournoi</h3>
-    <div class="fb-share-button" data-href="http://127.0.0.1:8000/rankings" data-layout="" data-size=""><a target="_blank"
-            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Frankings&amp;src=sdkpreparse"
-            class="fb-xfbml-parse-ignore">Partager</a></div>
+    <div class="flex justify-end">
+        <iframe
+            src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2F127.0.0.1%3A8000%2Frankings&layout&size&width=91&height=20&appId"
+            width="91" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+            allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+        </iframe>
+    </div>
     <div class="flex flex-col my-4">
         <div class="overflow-x-auto">
             <div class="inline-block min-w-full">

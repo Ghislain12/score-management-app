@@ -4,15 +4,25 @@
         <div class="w-full px-6 mx-auto lg:px-8">
             <div class="flex flex-col mt-4">
                 @if ($matchs->count() > 0)
+                    <div class="flex justify-end">
+                        <iframe
+                            src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2F127.0.0.1%3A8000%2Fplans&layout&size&width=91&height=20&appId"
+                            width="91" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                            allowfullscreen="true"
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        </iframe>
+                    </div>
                     <div class="overflow-x-auto">
                         <div class="inline-block min-w-full">
                             <div class="overflow-hidden">
                                 <table class="min-w-full divide-y divide-neutral-200 ">
                                     <thead>
                                         <tr class="text-neutral-500">
-                                            <th class="px-5 py-3 text-xs font-medium text-center uppercase">Equipe 1</th>
+                                            <th class="px-5 py-3 text-xs font-medium text-center uppercase">Equipe 1
+                                            </th>
                                             <th></th>
-                                            <th class="px-5 py-3 text-xs font-medium text-center uppercase">Equipe 2</th>
+                                            <th class="px-5 py-3 text-xs font-medium text-center uppercase">Equipe 2
+                                            </th>
                                             <th class="px-5 py-3 text-xs font-medium text-left uppercase">Arbitre de la
                                                 rencontre</th>
                                             <th class="px-5 py-3 text-xs font-medium text-left uppercase">Date de la

@@ -6,9 +6,9 @@
             <div class="w-20 h-20 p-1 bg-white rounded-full">
                 <img src="{{ $data->picture }}" class="w-full h-full rounded-full" />
             </div>
-            <a href="{{ route('teams:show', ['team' => 1]) }}" class="block mt-6 ml-2">
+            <a href="{{ route('teams:show', ['team' => $data->id]) }}" class="block mt-6 ml-2">
                 <h5 class="text-lg font-bold leading-none tracking-tight text-neutral-900">
-                    svfvfv</h5>
+                    {{ $data->name }}</h5>
                 <small
                     class="block mt-1 text-sm font-medium leading-none text-neutral-500"><span>@</span><span>{{ strtolower($data->name) }}</span></small>
             </a>
@@ -286,7 +286,7 @@
                             </thead>
                             <tbody class="divide-y divide-neutral-200">
                                 @foreach ($data->players as $player)
-                                    <tr class="text-neutral-800 @if ($item['team_id'] == $team) bg-green-200 @endif">
+                                    <tr class="text-neutral-800">
                                         <td class="px-5 py-4 text-sm font-medium whitespace-nowrap">
                                             {{ $player->name }}
                                         </td>
