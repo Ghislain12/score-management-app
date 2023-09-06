@@ -12,6 +12,13 @@ class Index extends Component
 
     public $i = 0;
 
+    protected $listeners = ['echo:request-treatment,RequestTreatment' => 'refreshPage'];
+
+    public function refreshPage()
+    {
+        $this->mount();
+    }
+
     public function mount()
     {
         $teamIds = Team::all()->pluck('id');

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\RequestTreatment;
 use App\Models\Encounter;
 use App\Models\MatchDetail;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,18 @@ class CurrentMatch extends Component
     public $goal;
 
     public $match;
+
+    protected $listeners = ['echo:request-treatment,RequestTreatment' => 'refreshPage'];
+
+    public function refreshPage()
+    {
+        $this->match = Encounter::with(['event' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])
+            ->whereNull('end_date')
+            ->where('start_date', '<', date('Y-m-d H:i'))
+            ->first();
+    }
 
     public function saveDetail()
     {
@@ -64,6 +77,8 @@ class CurrentMatch extends Component
             ->first();
 
         $this->reset('title', 'content');
+
+        event(new RequestTreatment);
     }
 
     public function mount()
@@ -94,6 +109,8 @@ class CurrentMatch extends Component
             ->whereNull('end_date')
             ->where('start_date', '<', date('Y-m-d H:i'))
             ->first();
+
+        event(new RequestTreatment);
     }
 
     public function render()

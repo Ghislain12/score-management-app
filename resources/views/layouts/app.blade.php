@@ -52,18 +52,95 @@
                             class="flex-col items-center w-full h-full p-3 overflow-hidden bg-black bg-opacity-50 rounded-lg select-none md:p-0 backdrop-blur-lg md:h-auto md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto">
                             <div
                                 class="flex flex-col items-center justify-end w-full h-full pt-2 md:w-full md:flex-row md:py-0">
-                                @if (Auth::user())
-                                    <a href="{{ route('profil:index') }}"
-                                        class="inline-flex items-center justify-center w-full px-4 py-3 md:py-1.5 font-medium leading-6 text-center whitespace-no-wrap transition duration-150 ease-in-out border border-transparent md:mr-1 text-gray-600 md:w-auto bg-white rounded-lg md:rounded-full hover:bg-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700">Profil</a>
-                                    <a href="{{ route('logout:index') }}"
-                                        class="inline-flex items-center justify-center w-full px-4 py-3 md:py-1.5 font-medium leading-6 text-center whitespace-no-wrap transition duration-150 ease-in-out border border-transparent md:mr-1 text-gray-600 md:w-auto bg-white rounded-lg md:rounded-full hover:bg-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700">Déconnexion</a>
-                                @else
+                                @if (!Auth::user())
                                     <a href="{{ route('login:login') }}"
                                         class="w-full py-5 mr-0 text-center text-gray-200 md:py-3 md:w-auto hover:text-white md:pl-0 md:mr-3 lg:mr-5">Connexion</a>
                                     <a href="#_"
                                         class="inline-flex items-center justify-center w-full px-4 py-3 md:py-1.5 font-medium leading-6 text-center whitespace-no-wrap transition duration-150 ease-in-out border border-transparent md:mr-1 text-gray-600 md:w-auto bg-white rounded-lg md:rounded-full hover:bg-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700">Inscription</a>
                                 @endif
                             </div>
+                        </div>
+                        <div
+                            class="fixed top-0 left-0 z-40 items-center hidden w-full h-full p-3 text-sm bg-gray-900 bg-opacity-50 md:w-auto md:bg-transparent md:p-0 md:relative md:flex">
+                            @if (auth()->user())
+                                <nav x-data="{
+                                    navigationMenuOpen: false,
+                                    navigationMenu: '',
+                                    navigationMenuCloseDelay: 200,
+                                    navigationMenuCloseTimeout: null,
+                                    navigationMenuLeave() {
+                                        let that = this;
+                                        this.navigationMenuCloseTimeout = setTimeout(() => {
+                                            that.navigationMenuClose();
+                                        }, this.navigationMenuCloseDelay);
+                                    },
+                                    navigationMenuReposition(navElement) {
+                                        this.navigationMenuClearCloseTimeout();
+                                        this.$refs.navigationDropdown.style.left = navElement.offsetLeft + 'px';
+                                        this.$refs.navigationDropdown.style.marginLeft = (navElement.offsetWidth / 2) + 'px';
+                                    },
+                                    navigationMenuClearCloseTimeout() {
+                                        clearTimeout(this.navigationMenuCloseTimeout);
+                                    },
+                                    navigationMenuClose() {
+                                        this.navigationMenuOpen = false;
+                                        this.navigationMenu = '';
+                                    }
+                                }" class="relative z-10 w-auto">
+                                    <div class="relative">
+                                        <ul
+                                            class="flex items-center justify-center flex-1 p-1 space-x-1 list-none border rounded-md text-neutral-700 group border-neutral-200/80">
+                                            <li>
+                                                <button
+                                                    :class="{
+                                                        'bg-neutral-100': navigationMenu ==
+                                                            'learn-more',
+                                                        'hover:bg-neutral-100': navigationMenu != 'learn-more'
+                                                    }"
+                                                    @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='learn-more'"
+                                                    @mouseleave="navigationMenuLeave()"
+                                                    class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors rounded-md hover:text-neutral-900 focus:outline-none disabled:opacity-50 disabled:pointer-events-none bg-background hover:bg-neutral-100 group w-max">
+                                                    <span>{{ Auth::user()->name }}</span>
+                                                    <svg :class="{
+                                                        '-rotate-180': navigationMenuOpen == true &&
+                                                            navigationMenu ==
+                                                            'learn-more'
+                                                    }"
+                                                        class="relative top-[1px] ml-1 h-3 w-3 ease-out duration-300"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                                    </svg>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div x-ref="navigationDropdown" x-show="navigationMenuOpen"
+                                        x-transition:enter="transition ease-out duration-100"
+                                        x-transition:enter-start="opacity-0 scale-90"
+                                        x-transition:enter-end="opacity-100 scale-100"
+                                        x-transition:leave="transition ease-in duration-100"
+                                        x-transition:leave-start="opacity-100 scale-100"
+                                        x-transition:leave-end="opacity-0 scale-90"
+                                        @mouseover="navigationMenuClearCloseTimeout()" @mouseleave="navigationMenuLeave()"
+                                        class="absolute top-0 pt-3 duration-200 ease-out -translate-x-1/2 translate-y-11"
+                                        x-cloak>
+                                        <div
+                                            class="flex justify-center w-auto h-auto overflow-hidden bg-white border rounded-md shadow-sm border-neutral-200/70">
+                                            <div x-show="navigationMenu == 'learn-more'"
+                                                class="flex items-stretch justify-center w-full p-6">
+                                                <div class="w-50">
+                                                    <a href="{{ route('profil:index') }}"
+                                                        class="inline-flex items-center justify-center w-full px-4 py-3 md:py-1.5 font-medium leading-6 text-center whitespace-no-wrap transition duration-150 ease-in-out border border-transparent md:mr-1 text-gray-600 md:w-auto bg-white rounded-lg md:rounded-full hover:bg-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700">Profil</a>
+                                                    <a href="{{ route('logout:index') }}"
+                                                        class="inline-flex items-center justify-center w-full px-4 py-3 md:py-1.5 font-medium leading-6 text-center whitespace-no-wrap transition duration-150 ease-in-out border border-transparent md:mr-1 text-gray-600 md:w-auto bg-white rounded-lg md:rounded-full hover:bg-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700">Déconnexion</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            @endif
                         </div>
                     </div>
                     <div @click="showMenu = !showMenu"

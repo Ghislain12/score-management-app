@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Plans;
 
+use App\Events\RequestTreatment;
 use App\Models\Bet;
 use App\Models\Encounter;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,9 @@ class Index extends Component
 {
     use WithPagination;
 
-
     public  $data, $bet, $succesMessage = false;
+
+    protected $listeners = ['echo:request-treatment,RequestTreatment' => 'refreshPage'];
 
     public function modalData(int $id)
     {
@@ -58,5 +60,7 @@ class Index extends Component
         );
 
         $this->succesMessage = true;
+
+        event(new RequestTreatment);
     }
 }

@@ -1,37 +1,45 @@
-<div class="w-full px-6 mx-auto mt-4 max-w-7xl lg:px-8 md:w-7/12">
+<div class="w-full px-6 mx-auto mt-4 max-w-7xl lg:px-8 xl:w-7/12">
     @if ($match)
         <div class="py-4 border shadow-sm">
-            <div class="flex items-center justify-between px-4 xl:px-60">
-                <div class="flex-col items-center justify-center">
-                    <img src="{{ $match->firstTeam->picture }}" alt="logo" class="w-20 h-20 rounded-full">
+            <div class="flex items-center justify-between px-4 ">
+                <div class="flex-col items-center justify-center w-4/12">
+                    <img src="{{ $match->firstTeam->picture }}" alt="logo"
+                        class="md:w-20 md:h-20 h-16 w-16 rounded-full mx-auto">
                     <a href="{{ route('teams:show', ['team' => $match->firstTeam->id]) }}">
                         <h3
-                            class="max-w-5xl mx-auto mt-4 mb-6 text-xl font-extrabold leading-none tracking-normal text-center text-gray-900 md:tracking-tight">
+                            class="max-w-5xl mx-auto mt-4 mb-6 md:text-xl text-sm font-extrabold leading-none tracking-normal text-center text-gray-900 md:tracking-tight">
                             <span
                                 class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">{{ $match->firstTeam->name }}</span>
                         </h3>
                     </a>
                 </div>
-                <div>
-                    <h3>
+                <div class="w-4/12 text-center hidden md:block">
+                    <h3 class="text-sm"><span class="mx-4">{{ $match->first_team_score }}</span>
                         <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">VS
                         </span>
+                        <span class="mx-4">{{ $match->second_team_score }}</span>
                     </h3>
                 </div>
-                <div>
-                    <img src="{{ $match->secondTeam->picture }}" alt="logo" class="w-20 h-20 rounded-full">
+                <div class="flex-col items-center justify-center w-4/12">
+                    <img src="{{ $match->secondTeam->picture }}" alt="logo"
+                        class="md:w-20 md:h-20 h-16 w-16 rounded-full mx-auto">
                     <a href="{{ route('teams:show', ['team' => $match->secondTeam->id]) }}">
                         <h3
-                            class="max-w-5xl mx-auto mt-4 mb-6 text-xl font-extrabold leading-none tracking-normal text-center text-gray-900 md:tracking-tight">
+                            class="max-w-5xl mx-auto mt-4 mb-6 md:text-xl text-sm font-extrabold leading-none tracking-normal text-center text-gray-900 md:tracking-tight">
                             <span
                                 class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">{{ $match->secondTeam->name }}</span>
                         </h3>
                     </a>
                 </div>
             </div>
-            <div class="flex items-center justify-center space-x-4 font-bold">
-                <span>{{ $match->first_team_score }}</span><span>:</span><span>{{ $match->second_team_score }}</span>
+            <div class="w-full text-center block md:hidden">
+                <h3 class="text-sm"><span class="mx-4">{{ $match->first_team_score }}</span>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">VS
+                    </span>
+                    <span class="mx-4">{{ $match->second_team_score }}</span>
+                </h3>
             </div>
         </div>
         <div class="flex items-center justify-between">
@@ -129,7 +137,8 @@
                         <label for="scorerTeam" class="font-medium text-gray-900">Equipe ayant marqué</label>
                         <select
                             class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50"
-                            data-primary="blue-600" data-rounded="rounded-lg" wire:model='scorerTeam' id="scorerTeam">
+                            data-primary="blue-600" data-rounded="rounded-lg" wire:model='scorerTeam'
+                            id="scorerTeam">
                             <option value="" hidden>Veuillez sélectionner une équipe</option>
                             <option value="{{ $match->firstTeam->id }}">{{ $match->firstTeam->name }}</option>
                             <option value="{{ $match->secondTeam->id }}">{{ $match->secondTeam->name }}</option>

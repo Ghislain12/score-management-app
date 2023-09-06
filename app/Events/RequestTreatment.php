@@ -4,24 +4,21 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewTrade
+class RequestTreatment implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    public $trade;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($trade)
+    public function __construct()
     {
-        $this->trade = $trade;
+        //
     }
 
     /**
@@ -31,6 +28,6 @@ class NewTrade
      */
     public function broadcastOn(): Channel
     {
-        return new Channel('trades');
+        return new Channel('request-treatment');
     }
 }

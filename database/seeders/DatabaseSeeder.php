@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Encounter;
 use App\Models\MatchDetail;
+use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -25,11 +26,6 @@ class DatabaseSeeder extends Seeder
 
         MatchDetail::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        
+        Player::factory(44)->create();
     }
 }

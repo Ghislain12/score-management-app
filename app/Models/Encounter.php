@@ -40,4 +40,9 @@ class Encounter extends Model
     {
         return $this->belongsTo(Team::class, 'second_team', 'id');
     }
+
+    public function bet(): HasMany
+    {
+        return $this->hasMany(Bet::class, 'encounter_id');
+    }
 }

@@ -46,3 +46,7 @@ Route::prefix('rankings')->as('rankings:')->group(
 Route::prefix('profil')->as('profil:')->middleware('auth')->group(
     base_path('routes/web/profil.php'),
 );
+
+Route::prefix('register')->as('register:')->group(
+    base_path('routes/web/register.php'),
+);

@@ -11,6 +11,13 @@ class Profil extends Component
 {
     public $totalPoint, $matchWins, $matchLoose, $awaiting;
 
+    protected $listeners = ['echo:request-treatment,RequestTreatment' => 'refreshPage'];
+
+    public function refreshPage()
+    {
+        $this->mount();
+    }
+
     public function mount()
     {
         $win = Bet::join('encounters', 'bets.encounter_id', 'encounters.id')
@@ -33,15 +40,16 @@ class Profil extends Component
             ->where('user_id', Auth::user()->id)
             ->where(function (Builder $query) {
                 $query->where('bet', 'V1')
-                    ->whereColumn('encounters.first_team_score', '>=', 'encounters.second_team_score')
+                    ->whereColumn('encounters.first_team_score', '<=', 'encounters.second_team_score')
                     ->whereNotNull('encounters.end_date');
-            })->orWhere(function (Builder $query) {
+            })
+            ->orWhere(function (Builder $query) {
                 $query->where('bet', 'X')
                     ->whereColumn('encounters.first_team_score', '!=', 'encounters.second_team_score')
                     ->whereNotNull('encounters.end_date');
             })->orWhere(function (Builder $query) {
                 $query->where('bet', 'V2')
-                    ->whereColumn('encounters.first_team_score', '<=', 'encounters.second_team_score')
+                    ->whereColumn('encounters.first_team_score', '>=', 'encounters.second_team_score')
                     ->whereNotNull('encounters.end_date');
             });
 
@@ -56,7 +64,6 @@ class Profil extends Component
 
     public function render()
     {
-        dd($this->matchWins);
         return view('livewire.user.profil');
     }
 }

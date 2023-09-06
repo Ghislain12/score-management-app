@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Teams;
 
-use App\Http\Commands\Followers\CreateNewFollower;
+use App\Events\RequestTreatment;
 use App\Models\Follower;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +12,13 @@ use Livewire\Component;
 class Index extends Component
 {
     public $teams;
+
+    protected $listeners = ['echo:request-treatment,RequestTreatment' => 'refreshPage'];
+
+    public function refreshPage()
+    {
+        $this->teams = Team::withCount('follower')->get();
+    }
 
     public function mount()
     {
@@ -31,6 +38,7 @@ class Index extends Component
                 )->save(),
             );
             $this->teams = Team::withCount('follower')->get();
+            event(new RequestTreatment);
         } else {
             return redirect()->route('login:login')->with('Veuillez vous connecter pour vous abonner');
         }
@@ -40,6 +48,7 @@ class Index extends Component
     {
         Follower::where('user_id', Auth::user()->id)->where('team_id', $team->id)->first()->delete();
         $this->teams = Team::withCount('follower')->get();
+        event(new RequestTreatment);
     }
 
     public function render()

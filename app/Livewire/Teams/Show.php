@@ -2,8 +2,13 @@
 
 namespace App\Livewire\Teams;
 
+use App\Events\RequestTreatment;
 use App\Models\Encounter;
+use App\Models\Follower;
 use App\Models\Team;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Show extends Component
@@ -20,9 +25,21 @@ class Show extends Component
 
     public $i = 0;
 
+    protected $listeners = ['echo:request-treatment,RequestTreatment' => 'refreshPage'];
+
+    public function refreshPage()
+    {
+        $this->mount();
+    }
+
     public function mount()
     {
-        $this->data = Team::where('id', $this->team)->first();
+
+        $this->data = Team::with(['players' => function ($query) {
+            $query->orderBy('post');
+        }])->withCount('follower')
+            ->where('id', $this->team)
+            ->first();
 
         $this->details = Encounter::where(function ($query) {
             $query->where('first_team', $this->team)
@@ -80,6 +97,30 @@ class Show extends Component
         });
 
         $this->ranking = $globalArray;
+    }
+
+    public function follower(string $team)
+    {
+        if (Auth::user()) {
+            $follower = new Follower();
+            DB::transaction(
+                callback: fn (): bool => $follower->forceFill(
+                    attributes: [
+                        'team_id' => $team,
+                        'user_id' => Auth::user()->id,
+                    ]
+                )->save(),
+            );
+            event(new RequestTreatment);
+        } else {
+            return redirect()->route('login:login')->with('Veuillez vous connecter pour vous abonner');
+        }
+    }
+
+    public function unFollow(string $team)
+    {
+        Follower::where('user_id', Auth::user()->id)->where('team_id', $team)->first()->delete();
+        event(new RequestTreatment);
     }
 
     public function render()

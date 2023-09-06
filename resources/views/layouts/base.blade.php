@@ -39,6 +39,9 @@
 
 <body class="bg-dots">
     @yield('body')
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v17.0"
+        nonce="X4XYKXCQ"></script>
 </body>
 
 </html>
