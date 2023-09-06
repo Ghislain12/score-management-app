@@ -8,6 +8,7 @@ use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +41,8 @@ Route::prefix('plans')->as('plans:')->group(
 
 Route::prefix('rankings')->as('rankings:')->group(
     base_path('routes/web/rankings.php'),
+);
+
+Route::prefix('profil')->as('profil:')->middleware('auth')->group(
+    base_path('routes/web/profil.php'),
 );

@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreign('encounter_id')->references('id')->on('encounters');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('team_id');
-            $table->foreign('team_id')->references('id')->on('teams');
             $table->enum('bet', ['V1', 'V2', 'X']);
             $table->timestamps();
         });

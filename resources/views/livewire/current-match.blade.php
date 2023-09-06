@@ -1,12 +1,12 @@
-<div class="px-6 mx-auto max-w-7xl lg:px-8 mt-4 md:w-7/12 w-full">
+<div class="w-full px-6 mx-auto mt-4 max-w-7xl lg:px-8 md:w-7/12">
     @if ($match)
-        <div class="border shadow-sm py-4">
-            <div class="flex justify-between px-4 xl:px-60 items-center">
-                <div class="flex-col justify-center items-center">
-                    <img src="{{ $match->firstTeam->picture }}" alt="logo" class="rounded-full h-20 w-20">
+        <div class="py-4 border shadow-sm">
+            <div class="flex items-center justify-between px-4 xl:px-60">
+                <div class="flex-col items-center justify-center">
+                    <img src="{{ $match->firstTeam->picture }}" alt="logo" class="w-20 h-20 rounded-full">
                     <a href="{{ route('teams:show', ['team' => $match->firstTeam->id]) }}">
                         <h3
-                            class="mb-6 text-xl text-center mt-4 font-extrabold leading-none max-w-5xl mx-auto tracking-normal text-gray-900 md:tracking-tight">
+                            class="max-w-5xl mx-auto mt-4 mb-6 text-xl font-extrabold leading-none tracking-normal text-center text-gray-900 md:tracking-tight">
                             <span
                                 class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">{{ $match->firstTeam->name }}</span>
                         </h3>
@@ -20,10 +20,10 @@
                     </h3>
                 </div>
                 <div>
-                    <img src="{{ $match->secondTeam->picture }}" alt="logo" class="rounded-full h-20 w-20">
+                    <img src="{{ $match->secondTeam->picture }}" alt="logo" class="w-20 h-20 rounded-full">
                     <a href="{{ route('teams:show', ['team' => $match->secondTeam->id]) }}">
                         <h3
-                            class="mb-6 text-xl text-center mt-4 font-extrabold leading-none max-w-5xl mx-auto tracking-normal text-gray-900 md:tracking-tight">
+                            class="max-w-5xl mx-auto mt-4 mb-6 text-xl font-extrabold leading-none tracking-normal text-center text-gray-900 md:tracking-tight">
                             <span
                                 class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">{{ $match->secondTeam->name }}</span>
                         </h3>
@@ -34,10 +34,10 @@
                 <span>{{ $match->first_team_score }}</span><span>:</span><span>{{ $match->second_team_score }}</span>
             </div>
         </div>
-        <div class="flex justify-between items-center">
-            <h3 class="md:text-4xl text-xl font-extrabold dark:text-white my-4">Détail du match</h3>
+        <div class="flex items-center justify-between">
+            <h3 class="my-4 text-xl font-extrabold md:text-4xl dark:text-white">Détail du match</h3>
             <button type="button" wire:click="closeMatch('{{ $match->id }}')"
-                class="inline-flex items-center justify-center px-2 h-10 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
+                class="inline-flex items-center justify-center h-10 px-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
                 Fin du match
             </button>
         </div>
@@ -85,8 +85,8 @@
                 @endif
             </ol>
         </div>
-        <h3 class="md:text-4xl text-xl font-extrabold dark:text-white my-4">Ajouter un détail</h3>
-        <div class="border shadow-sm py-4 mt-4 px-4">
+        <h3 class="my-4 text-xl font-extrabold md:text-4xl dark:text-white">Ajouter un détail</h3>
+        <div class="px-4 py-4 mt-4 border shadow-sm">
             <form wire:submit='saveDetail()' x-data="{ goal: false }">
                 <div class="relative w-full mt-10 space-y-8">
                     <div class="relative">
@@ -140,7 +140,7 @@
                     </div>
                     <div class="relative">
                         <button type="submit"
-                            class="inline-block md:w-2/12 px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-700 ease"
+                            class="inline-block px-5 py-2 text-lg font-medium text-center text-white transition duration-200 bg-blue-600 rounded-lg md:w-2/12 hover:bg-blue-700 ease"
                             data-primary="blue-600" data-rounded="rounded-lg">Ajouter
                         </button>
                     </div>
